@@ -1,0 +1,66 @@
+
+From the results obtained above, we observe a test accuracy of 23.80 and a loss of 3.6738. This as it seems suggest that we could perhaps 
+be overfitting but with less number of epochs, it is harder to state. However, this is something that we could work on, by increasing the 
+number of epochs. Training with more epochs may be problematic in some regions as instead of being able to apply what it has learnt to new 
+data, it memorizes and uses what it already knows to new, unseen data leading to incorrect predictions and thus, finding an appropriate 
+amount is essential. If, we run with less epochs, it may not be training enough and so, we would observe lower performance of the model.
+
+
+We could use image processing as the images seem to be of different sizes and this could play a major role in affecting the accuracy of
+the applied algorithm. This includes resizing the image as different extreme sized images e.g. very large or very small, can result in
+more computational resources being needed and thus, slows down the training process as it would make the network very difficult to train.
+To combat this, it will need to be standardized and cleaned up before we apply the neural network as this may be causing an issue.  
+Normally, a cost function is found to be in the shape of a bowl but if the features are of different scales, it becomes elongated instead
+and this may cause the optimization algorithm to get stuck in a local minimum that is suboptimal. 
+
+We could also adjust the learning rate, which determines how much the weights of the model can be changed during training. It is important,
+again, just like with any other hyperparameter to ensure that it is an appropriate number. With too low of a number, it may not be at its
+best to converge to its optimum value and with the opposite extreme, a higher learning rate can also cause problems. However, the problems
+that occur with a higher learning rate is that it overshoots the optimum and leads to poor generalization. We could utilize adaptive learning
+where algorithms automatically update the learning rate when the training stops. They can increase and decrease the learning rate by itself
+depending on the situation.
+
+We could also adjust the batch size, this has beneficial impact in certain ways just like with learning rate but as with learning rate,
+caution must be taken. With a higher batch size, comes an important benefit of which gradients calculated during backpropagation permits the 
+ability to converge to an optimum value based on more training examples. We could also use batch, stochastic and various others as it can affect 
+the value of the error, gradient calculation and backpropagation to determine its weights as they have different ways of updating weights based
+on their gradients and as a result, different convergence values and behavior can be observed. Adam for example, could also have been used which
+adjusts the learning rate for each weight, based on the first and second moments of the gradients which utilizes momentum which is needed to
+accelerate learning in the current iteration. However, with this, noise can be a substantial issue and the model updates its parameters based 
+on a large sample of data. This is highly problematic as it can lead to the model being unable to find detailed features in the data. And thus, 
+is unable to reach a global minimum, but instead finds itself trapped in a suboptimal solution. 
+
+We could also introduce regularization techniques that enable dropout to be used to prevent overfitting by randomly dropping out neurons 
+( in a certain forward/backward pass) which reduces the reliance on other neurons, thereby forcing to learn a particular set of features. Thereby, 
+if one neuron makes a mistake, it is not of major concern and thus, the mistake does not dominate the model. This ensures that the weight is spread
+out and thus, prevents overfitting. We could also use ensemble learning, which trains weak classifiers separately, combining them at the end to make a
+prediction by averaging their responses as each will have their own error made as they learn different areas of the data. This will produce a much 
+stronger classifier, which will make overfitting less likely an issue to be faced in the future. Another great regularization technique is the L2 
+regularization which penalizes the error function and thus, the error becomes larger which when taken the derivative of, the weight becomes smaller by
+finding the weight values that lead to low training error which prevents them from overfitting the training data. 
+
+Data augmentation is vital to artificially increase the dataset so that the neural network is able to recognize the new images as we expose it to a 
+variety of variations. This will enable it to recognize new, unseen data and prevent overfitting. We could also have utilized different architectures, 
+even in resnet-50, we have a total of 50 layers and resNet-18 has 18 layers. This can have a major impact as resNet-50 has more layers, it is able 
+to learn more complex features and patterns that otherwise would not be possible with resNet-18. Even if resNet-18 performs well with smaller datasets,
+we find that it may be prone to overfitting and thus augmentation, regularization may play a pivotal role in here. However, it may be the case that 
+resNet50 outperforms resNet-18 if the task to be performed is extremely complex, even if the dataset is small. In addition to this, we could try 
+various architectures that performed well to this dataset in which case we would have to use batch normalization for certain models which can prevent
+overfitting by normalizing the activation of each layer, subtracting the mean and dividing by the standard deviation. This is essential to prevent
+the network from being sensitive to the specific location of the data, but instead if focused on the patterns and relationships found in within the data.
+Thus, this prevents the inputs to each layer from being at the extreme end (too large/too small) which can cause either vanishing/exploding gradients. 
+Therefore, it is vital to use a weight decay which penalizes the loss function. In observing the validation loss, early stopping can be used to stop the 
+training process when validation is no longer improving. 
+
+In within an existing architecture, however, we could train it further by freezing the weights of the earlier layers of the network, which detects 
+the low-level features and updating the weights of the later layers, which detect high-level features. 
+In addition to the different types of architecture that are found, we might need to fine-tune depending on what is suitable for that particular 
+architecture and depending on our dataset, in which we might need to freeze the feature extraction and remove the classifier part, imposing our own
+classifier. Sometimes, it may also be necessary to instead do it early on if the domains of the problem are different in which case, we would be 
+required to retrain all the remaining layers as later layers may contain more specific features which is not suitable for our dataset. Or, it might
+be the case to retrain half of the network and half to be frozen to garner a better performance for our model, and thus, leading to higher accuracy
+and a lower loss for our test data. Thus, the architecture utilized, as well the size of our dataset and what dataset constitutes plays an important 
+role here. 
+
+
+
